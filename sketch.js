@@ -130,9 +130,11 @@ Boid.prototype.render = function () {
     //   vertex(-this.r, this.r * 2);
     //   vertex(this.r, this.r * 2);
     //   endShape(CLOSE);
+    let roundedness = 0;
     if (this.rounded < 0.75){
-        rect(-this.r/2, -this.r/2, this.r/2, this.r/2, this.r/2, 0, 0, 0);
+        roundedness = this.r/2;
     }
+    rect(-this.r/2, -this.r/2, this.r/2, this.r/2, roundedness, 0, 0, 0);
     pop();
 }
 
