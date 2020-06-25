@@ -63,6 +63,7 @@ function Boid(x, y) {
     this.maxspeed = 3;    // Maximum speed
     this.maxforce = 0.05; // Maximum steering force
     this.alpha = random(10, 80);
+    this.rounded = random(1);
 }
 
 Boid.prototype.run = function (boids) {
@@ -129,7 +130,9 @@ Boid.prototype.render = function () {
     //   vertex(-this.r, this.r * 2);
     //   vertex(this.r, this.r * 2);
     //   endShape(CLOSE);
-    rect(-this.r/2, -this.r/2, this.r, this.r);
+    if (this.rounded < 0.75){
+        rect(-this.r/2, -this.r/2, this.r/2, this.r/2, this.r/2, 0, 0, 0);
+    }
     pop();
 }
 
