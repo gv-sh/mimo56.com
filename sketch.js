@@ -125,16 +125,22 @@ Boid.prototype.render = function () {
     push();
     translate(this.position.x, this.position.y);
     rotate(theta);
-    //   beginShape();
-    //   vertex(0, -this.r * 2);
-    //   vertex(-this.r, this.r * 2);
-    //   vertex(this.r, this.r * 2);
-    //   endShape(CLOSE);
+
     let roundedness = 0;
-    if (this.rounded < 0.75){
+    if (this.rounded < 0.3){
         roundedness = this.r/2;
+        rect(-this.r/2, -this.r/2, this.r/2, this.r/2, roundedness, 0, 0, 0);
+    } else if (this.rounded < 0.6){
+        beginShape();
+        vertex(0, -this.r * 2);
+        vertex(-this.r, this.r * 2);
+        vertex(this.r, this.r * 2);
+        endShape(CLOSE);
+    } else {
+        roundedness = 0;
+        rect(-this.r/2, -this.r/2, this.r/2, this.r/2, roundedness, 0, 0, 0);
     }
-    rect(-this.r/2, -this.r/2, this.r/2, this.r/2, roundedness, 0, 0, 0);
+    
     pop();
 }
 
