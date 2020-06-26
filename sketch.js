@@ -5,11 +5,13 @@ let flock;
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
+    // fullscreen(true);
     frameRate(16);
+
     flock = new Flock();
     // Add an initial set of boids into the system
-    for (let i = 0; i < 20; i++) {
-        let b = new Boid(random(width / 2), random(height / 2));
+    for (let i = 0; i < 25; i++) {
+        let b = new Boid(random(width), random(height));
         flock.addBoid(b);
     }
 }
@@ -21,7 +23,7 @@ function draw() {
 
 // Add a new boid into the System
 function mouseDragged() {
-    if (frameCount % 1000) {
+    if (random(1)<0.1) {
         flock.addBoid(new Boid(mouseX, mouseY));
     }
 }
@@ -57,13 +59,13 @@ Flock.prototype.addBoid = function (b) {
 
 function Boid(x, y) {
     this.acceleration = createVector(0, 0);
-    this.velocity = createVector(random(-1, 1), random(-1, 1));
+    this.velocity = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
     this.position = createVector(x, y);
-    this.r = random(100);
-    this.maxspeed = 3;    // Maximum speed
-    this.maxforce = 0.05; // Maximum steering force
-    this.alpha = random(10, 80);
-    this.rounded = random(1);
+    this.r = random(50,150);
+    this.maxspeed = 4;    // Maximum speed
+    this.maxforce = 0.07; // Maximum steering force
+    this.alpha = random(20, 100);
+    this.shape = int(random(1, 5));
 }
 
 Boid.prototype.run = function (boids) {
@@ -120,27 +122,34 @@ Boid.prototype.seek = function (target) {
 Boid.prototype.render = function () {
     // Draw a triangle rotated in the direction of velocity
     let theta = this.velocity.heading() + radians(90);
-    fill(166, 126, 91, this.alpha);
     noStroke();
     push();
     translate(this.position.x, this.position.y);
     rotate(theta);
 
-    let roundedness = 0;
-    if (this.rounded < 0.3){
-        roundedness = this.r/2;
-        rect(-this.r/2, -this.r/2, this.r/2, this.r/2, roundedness, 0, 0, 0);
-    } else if (this.rounded < 0.6){
-        beginShape();
-        vertex(0, -this.r * 2);
-        vertex(-this.r, this.r * 2);
-        vertex(this.r, this.r * 2);
-        endShape(CLOSE);
-    } else {
-        roundedness = 0;
-        rect(-this.r/2, -this.r/2, this.r/2, this.r/2, roundedness, 0, 0, 0);
+    switch (this.shape) {
+        case 1:
+            fill(166, 126, 91, this.alpha);
+            beginShape();
+            vertex(0, 0);
+            vertex(this.r / 3, 0);
+            vertex(0, this.r / 3);
+            endShape(CLOSE);
+            break;
+        case 2:
+            fill(163, 186, 191, this.alpha);
+            rect(-this.r / 2, -this.r / 2, this.r / 2, this.r / 2, this.r / 2, 0, 0, 0);
+            break;
+        case 3:
+            fill(163, 186, 191, this.alpha);
+            rect(-this.r / 2, -this.r / 2, this.r / 2, this.r / 2, this.r / 2, this.r / 2, 0, 0);
+            break;
+        default:
+            fill(163, 186, 191, this.alpha);
+            rect(-this.r / 2, -this.r / 2, this.r / 2, this.r / 2, 0, 0, 0, 0);
+            break;
     }
-    
+
     pop();
 }
 
@@ -155,7 +164,7 @@ Boid.prototype.borders = function () {
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function (boids) {
-    let desiredseparation = 50.0;
+    let desiredseparation = 100.0;
     let steer = createVector(0, 0);
     let count = 0;
     // For every boid in the system, check if it's too close
@@ -234,23 +243,15 @@ Boid.prototype.cohesion = function (boids) {
 }
 
 
-
-function touchStarted () {
-  var fs = fullscreen();
-  if (!fs) {
-    fullscreen(true);
-  }
-}
-
 /* full screening will change the size of the canvas */
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+    resizeCanvas(windowWidth, windowHeight);
 }
 
 /* prevents the mobile browser from processing some default
  * touch events, like swiping left for "back" or scrolling
  * the page.
  */
-document.ontouchmove = function(event) {
+document.ontouchmove = function (event) {
     event.preventDefault();
 };
