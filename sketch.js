@@ -10,7 +10,7 @@ function setup() {
 
     flock = new Flock();
     // Add an initial set of boids into the system
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 15; i++) {
         let b = new Boid(random(width), random(height));
         flock.addBoid(b);
     }
@@ -62,8 +62,8 @@ function Boid(x, y) {
     this.velocity = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
     this.position = createVector(x, y);
     this.r = random(50,150);
-    this.maxspeed = 4;    // Maximum speed
-    this.maxforce = 0.07; // Maximum steering force
+    this.maxspeed = 3;    // Maximum speed
+    this.maxforce = 0.04; // Maximum steering force
     this.alpha = random(20, 150);
     this.shape = int(random(1, 5));
 }
@@ -86,9 +86,9 @@ Boid.prototype.flock = function (boids) {
     let ali = this.align(boids);      // Alignment
     let coh = this.cohesion(boids);   // Cohesion
     // Arbitrarily weight these forces
-    sep.mult(1.5);
-    ali.mult(1.0);
-    coh.mult(1.0);
+    sep.mult(this.size/10);
+    ali.mult(this.size/15);
+    coh.mult(this.size/15);
     // Add the force vectors to acceleration
     this.applyForce(sep);
     this.applyForce(ali);
