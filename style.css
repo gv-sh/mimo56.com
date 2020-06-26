@@ -7,6 +7,7 @@
 * {
     font-family: var(--font-primary);
     line-height: 1.5;
+    text-rendering: optimizeLegibility;
 }
 
 body {
@@ -92,7 +93,7 @@ h3>a {
         line-height: 1.3;
     }
     h3 {
-        font-size: 204px;
+        font-size: 20px;
         line-height: 1.3;
     }
 
@@ -125,6 +126,10 @@ h3>a {
 a {
     color: #A67E5B;
     text-underline-offset: 10px;
+}
+
+a:hover {
+    
 }
 
 canvas {

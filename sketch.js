@@ -10,23 +10,23 @@ function setup() {
 
     flock = new Flock();
     // Add an initial set of boids into the system
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
         let b = new Boid(random(width), random(height));
         flock.addBoid(b);
     }
 }
 
 function draw() {
-    background(255);
+    background(253, 242, 233);
     flock.run();
 }
 
 // Add a new boid into the System
-function mouseDragged() {
-    if (random(1)<0.1) {
-        flock.addBoid(new Boid(mouseX, mouseY));
-    }
-}
+// function mouseDragged() {
+//     if (random(1) < 0.1) {
+//         flock.addBoid(new Boid(mouseX, mouseY));
+//     }
+// }
 
 // The Nature of Code
 // Daniel Shiffman
@@ -61,11 +61,15 @@ function Boid(x, y) {
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
     this.position = createVector(x, y);
-    this.r = random(50,150);
+    this.r = random(20, 80);
     this.maxspeed = 3;    // Maximum speed
     this.maxforce = 0.04; // Maximum steering force
     this.alpha = random(20, 150);
-    this.shape = int(random(1, 5));
+    this.shape = int(random(1, 10));
+
+    if (this.shape == 1){
+        this.r -= 0.50*this.r;
+    }
 }
 
 Boid.prototype.run = function (boids) {
@@ -86,9 +90,9 @@ Boid.prototype.flock = function (boids) {
     let ali = this.align(boids);      // Alignment
     let coh = this.cohesion(boids);   // Cohesion
     // Arbitrarily weight these forces
-    sep.mult(this.size/10);
-    ali.mult(this.size/15);
-    coh.mult(this.size/15);
+    sep.mult(this.size / 20);
+    ali.mult(this.size / 30);
+    coh.mult(this.size / 30);
     // Add the force vectors to acceleration
     this.applyForce(sep);
     this.applyForce(ali);
@@ -122,33 +126,37 @@ Boid.prototype.seek = function (target) {
 Boid.prototype.render = function () {
     // Draw a triangle rotated in the direction of velocity
     let theta = this.velocity.heading() + radians(90);
-    noStroke();
     push();
     translate(this.position.x, this.position.y);
     rotate(theta);
+    noStroke();
+    // fill(0);
+    // ellipse(0, 0, 5, 5);
 
     switch (this.shape) {
         case 1:
             fill(166, 126, 91, this.alpha);
             beginShape();
-            vertex(0, 0);
-            vertex(this.r / 3, 0);
-            vertex(0, this.r / 3);
+            vertex((this.r) -this.r/2 , -this.r/2);
+            vertex(-this.r/2, -this.r/2);
+            vertex(-this.r/2, (this.r) -this.r/2);
             endShape(CLOSE);
             break;
         case 2:
             fill(163, 186, 191, this.alpha);
-            rect(-this.r / 2, -this.r / 2, this.r / 2, this.r / 2, this.r / 2, 0, 0, 0);
+            rect(-this.r / 2, -this.r / 2, this.r, this.r, this.r / 2, 0, 0, 0);
             break;
         case 3:
             fill(163, 186, 191, this.alpha);
-            rect(-this.r / 2, -this.r / 2, this.r / 2, this.r / 2, this.r / 2, this.r / 2, 0, 0);
+            rect(-this.r / 2, -this.r / 2, this.r, this.r, this.r / 2, this.r / 2, 0, 0);
             break;
         default:
             fill(163, 186, 191, this.alpha);
-            rect(-this.r / 2, -this.r / 2, this.r / 2, this.r / 2, 0, 0, 0, 0);
+            // fill(255, 0, 0, 100);
+            rect(-this.r/2, -this.r/2, this.r, this.r, 0, 0, 0, 0);
             break;
     }
+
 
     pop();
 }
@@ -164,7 +172,7 @@ Boid.prototype.borders = function () {
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function (boids) {
-    let desiredseparation = 50.0;
+    let desiredseparation = this.r;
     let steer = createVector(0, 0);
     let count = 0;
     // For every boid in the system, check if it's too close
