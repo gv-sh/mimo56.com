@@ -64,7 +64,7 @@ function Boid(x, y) {
     this.r = random(20, 80);
     this.maxspeed = 3;    // Maximum speed
     this.maxforce = 0.04; // Maximum steering force
-    this.alpha = random(20, 150);
+    this.alpha = random(10, 50);
     this.shape = int(random(1, 10));
 
     if (this.shape == 1){
@@ -143,15 +143,15 @@ Boid.prototype.render = function () {
             endShape(CLOSE);
             break;
         case 2:
-            fill(163, 186, 191, this.alpha);
+            fill(45, 48, 64, this.alpha);
             rect(-this.r / 2, -this.r / 2, this.r, this.r, this.r / 2, 0, 0, 0);
             break;
         case 3:
-            fill(163, 186, 191, this.alpha);
+            fill(45, 48, 64, this.alpha);
             rect(-this.r / 2, -this.r / 2, this.r, this.r, this.r / 2, this.r / 2, 0, 0);
             break;
         default:
-            fill(163, 186, 191, this.alpha);
+            fill(45, 48, 64, this.alpha);
             // fill(255, 0, 0, 100);
             rect(-this.r/2, -this.r/2, this.r, this.r, 0, 0, 0, 0);
             break;
