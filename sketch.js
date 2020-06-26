@@ -252,6 +252,6 @@ function windowResized() {
  * touch events, like swiping left for "back" or scrolling
  * the page.
  */
-document.ontouchmove = function (event) {
-    event.preventDefault();
-};
+// document.ontouchmove = function (event) {
+//     event.preventDefault();
+// };
