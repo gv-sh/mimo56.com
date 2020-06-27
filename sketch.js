@@ -172,7 +172,7 @@ Boid.prototype.borders = function () {
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function (boids) {
-    let desiredseparation = this.r;
+    let desiredseparation = this.r * 3;
     let steer = createVector(0, 0);
     let count = 0;
     // For every boid in the system, check if it's too close
