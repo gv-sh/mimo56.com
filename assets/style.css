@@ -47,10 +47,8 @@ h3>a {
 
 
 @media screen and (max-width: 900px) {
-    body {
-        width: 70%;
-    }
     #container {
+        width: 70%;
         margin-top: 80px;
     }
     #logo {
@@ -72,10 +70,8 @@ h3>a {
 }
 
 @media screen and (max-width: 600px) {
-    body {
-        width: 80%;
-    }
     #container {
+        width: 80%;
         margin-top: 40px;
     }
     #logo {
@@ -97,10 +93,8 @@ h3>a {
 }
 
 @media screen and (max-width: 400px) {
-    body {
-        width: 80%;
-    }
     #container {
+        width: 90%;
         margin-top: 30px;
     }
     #logo {
