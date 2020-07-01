@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/blinking-cursor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="shortcut icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
     <script src="assets/sketch.js"></script>
+    <!-- <script src="assets/typewriter.js"></script> -->
     <title>M56</title>
 
     <script>
@@ -23,19 +25,28 @@
 </head>
 
 <body>
-    <div id="container" class="animate__animated animate__fadeInDown">
+    <div class="container" id="main">
         <div id="logo">
             <a href="#"><img width="200px" src="assets/logo-horizontal.svg"></a>
         </div>
 
-        <h1>
-            We take great pride in helping visionary individuals and businesses to attain their purpose.<br/>
-            Independent &#9679; Interdisciplinary &#9679; Human
-        </h1>
-        <h2>Have a project for us? <br /><a href="#">Let's have a chat!</a></h2>
+        <div id="opener">
+            <h1>We sincerely collaborate with visionary individuals and businesses to attain their purpose.</h1>
+            <h1 class="small">
+                Independent &#9679; Interdisciplinary &#9679; Human
+                <span class="blinking-cursor" style="font-size: 125%;">|</span>
+            </h1>
+        </div>
+        <h2>Have a project for us? <br />
+            <a href="#">Let's have a chat!</a>
+        </h2>
     </div>
 
-    <div id="container" class="animate__animated animate__fadeIn">
+    <div class="container" id="sec">
+        <h3>Currently working with:
+            <a target="_blank" href="https://www.empirici.com/">Empirici</a>,
+            <a target="_blank" href="https://www.anlyz.com/">Anlyz</a>
+        </h3>
         <h3>Our Friends:
             <a target="_blank" href="https://mathscapes.xyz">Mathscapes</a>,
             <a target="_blank" href="https://www.empirici.com/">Empirici</a>,
