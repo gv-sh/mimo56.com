@@ -77,4 +77,8 @@ canvas {
     * {
         font-size: 14px;
     }
+
+    .description p:nth-child(2) {
+        display: none;
+    }
 }
