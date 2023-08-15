@@ -5,8 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>M56 Design Studio</title>
-        <link rel="stylesheet" href="styles.css">
-        </link>
+        <link rel="stylesheet" href="styles.css"></link>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     </head>
 
@@ -20,6 +19,9 @@
             <div class="social-links">
                 Follow us on <a href="https://www.instagram.com/m56.hq/" target="_blank">Instagram</a> | Inquiries: <a href="mailto:swati@mimo56.com,prakhar@mimo56.com,grv@mimo56.com">Email</a>
             </div>
+            <div class="spotify">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3XslUzn335X1wjdXvvKhPH?utm_source=generator&theme=1" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
         </div>
         <script>
             let g_yoff; // Start yoff at a random value
@@ -27,13 +29,13 @@
             function setup() {
                 createCanvas(windowWidth, windowHeight);
                 g_yoff = random(1000);
-                
+
                 noStroke();
             }
 
             function draw() {
-                background(218,215,205);
-                fill(52,78,65);
+                background(218, 215, 205);
+                fill(52, 78, 65);
                 let yoff = g_yoff;
                 beginShape();
                 for (let x = 0; x <= width; x += 10) {
