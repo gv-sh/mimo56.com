@@ -1,67 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/blinking-cursor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/svg+xml" href="/assets/favicon.svg" />
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
-    <script src="assets/sketch.js"></script>
-    <!-- <script src="assets/typewriter.js"></script> -->
-    <title>M56</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>M56 Design Studio</title>
+        <link rel="stylesheet" href="styles.css">
+        </link>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    </head>
 
-    <script>
-        document.addEventListener("keypress", function (event) {
-            if (event.keyCode == 32) {
-                // Simulate a mouse click:
-                window.location.href = "/reveal.html";
+    <body>
+        <div class="content">
+            <div class="logo">M—56</div>
+            <div class="description">
+                <p>M56 is a design agency based in India, driven by a global vision. Our expertise lies in crafting exceptional digital experiences, brand identities, packaging, graphics, data visualization, and content strategies. With a passion for creativity and a commitment to delivering value, we thrive in embracing the chaos, creating engaging and unique designs.</p>
+                <p>Over the past seven years, we have partnered with diverse businesses, tailoring our approach to fulfill their goals with thoughtful and aesthetic solutions. Join us on a creative journey where strategy, aesthetics, and passion intertwine to bring your vision to life. M56 transcends borders, bringing captivating experiences to a global audience.</p>
+            </div>
+            <div class="social-links">
+                Follow us on <a href="https://www.instagram.com/m56.hq/" target="_blank">Instagram</a> | Inquiries: <a href="mailto:swati@mimo56.com,prakhar@mimo56.com,grv@mimo56.com">Email</a>
+            </div>
+        </div>
+        <script>
+            let g_yoff; // Start yoff at a random value
+
+            function setup() {
+                createCanvas(windowWidth, windowHeight);
+                g_yoff = random(1000);
+                
+                noStroke();
             }
-        });
-    </script>
-</head>
 
-<body>
-    <div class="parent">
-        <div class="container" id="main">
-            <div id="logo">
-                <a href="#"><img width="200px" src="assets/logo-horizontal.svg"></a>
-            </div>
+            function draw() {
+                background(218,215,205);
+                fill(52,78,65);
+                let yoff = g_yoff;
+                beginShape();
+                for (let x = 0; x <= width; x += 10) {
+                    let y = map(noise(yoff), 0, 1, 100, height - 100);
+                    vertex(x, y);
+                    yoff += 0.05;
+                }
+                vertex(width, height);
+                vertex(0, height);
+                endShape(CLOSE);
+                g_yoff += 0.001;
+            }
 
-            <div id="opener">
-                <h1>We collaborate with visionary individuals and businesses to attain their purpose<span class="blinking-cursor">|</span></h1>
-                <h1 class="small">
-                    <ul>
-                        <li><i class="material-icons">explore</i> Independent</li>
-                        <li><i class="material-icons">group_work</i> Interdisciplinary</li>
-                        <li><i class="material-icons">favorite</i> Human</li>
-                    </ul>
-                </h1>
-            </div>
-            <h2>Have a project for us? <br />
-                <a href="mailto:prakhar+grv+swati@mimo56.com">Let's begin <i class="material-icons">east</i></a>
-            </h2>
-        </div>
-    </div>
+            function windowResized() {
+                resizeCanvas(windowWidth, windowHeight);
+            }
+        </script>
 
-    <div class="content">
-        <div class="container" id="sec">
-            <h3>Currently working with:
-                <a target="_blank" href="https://www.empirici.com/">Empirici</a>,
-                <a target="_blank" href="https://www.anlyz.com/">Anlyz</a>
-            </h3>
-            <h3>Our Friends:
-                <a target="_blank" href="https://mathscapes.xyz">Mathscapes</a>,
-                <a target="_blank" href="https://www.empirici.com/">Empirici</a>,
-                <a target="_blank" href="https://www.maisonshefali.com/">Maison Shefali</a>
-            </h3>
-        </div>
-    </div>
-
-</body>
+    </body>
 
 </html>
